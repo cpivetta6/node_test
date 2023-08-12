@@ -14,7 +14,8 @@ app.post("/signup", async (req, res) => {
 
   console.log("Received data:", JSON.stringify(personData));
   saveUserToDatabase(JSON.stringify(personData));
-  //testDatabaseConnection();
+
+  testDatabaseConnection();
 
   res.status(200).json({ message: "Data received successfully" });
 });

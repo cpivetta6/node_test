@@ -9,7 +9,6 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false },
 });
 
-/*
 async function testDatabaseConnection() {
   const client = await pool.connect();
 
@@ -17,13 +16,13 @@ async function testDatabaseConnection() {
     const client = await pool.connect();
     console.log("Connected to the database.");
     // Perform a simple query to test the connection
-    const result = await client.query("SELECT NOW()");
-    console.log("Query result:", result.rows[0]);
+    const result = await client.query("SELECT * from public.users");
+    console.log("Query result:", result.rows);
     client.release();
   } catch (error) {
     console.error("Error testing database connection:", error);
   }
-}*/
+}
 
 async function saveUserToDatabase(data) {
   const user = JSON.parse(data);
@@ -33,8 +32,8 @@ async function saveUserToDatabase(data) {
     "INSERT INTO public.users (name, surname, email,  password) VALUES ( $1, $2, $3, $4)";
 
   const parameters = [user.name, user.lastname, user.email, user.password];
-  console.log("INSERT DATA");
-  console.log(user);
+  console.log("SAVE USER");
+
   console.log(parameters);
 
   try {
@@ -78,4 +77,4 @@ async function saveUserToDatabase(data) {
   }*/
 }
 
-module.exports = { saveUserToDatabase };
+module.exports = { saveUserToDatabase, testDatabaseConnection };
