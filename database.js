@@ -1,3 +1,4 @@
+const { query } = require("express");
 const { Pool } = require("pg");
 const pool = new Pool({
   host: "dpg-cjblcorbq8nc73dleq6g-a.ohio-postgres.render.com",
@@ -8,6 +9,7 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false },
 });
 
+/*
 async function testDatabaseConnection() {
   const client = await pool.connect();
 
@@ -21,11 +23,27 @@ async function testDatabaseConnection() {
   } catch (error) {
     console.error("Error testing database connection:", error);
   }
-}
+}*/
 
 async function saveUserToDatabase(data) {
+  const user = JSON.parse(data);
   const connection = await pool.connect();
-  console.log(data);
+
+  const query_addUser =
+    "INSERT INTO public.users (name, surname, email,  password) VALUES ( $1, $2, $3, $4)";
+
+  const parameters = [user.name, user.lastname, user.email, user.password];
+
+  console.log(parameters);
+
+  try {
+    const result = await connection.query(query_addUser, parameters);
+    //console.log("Query result:", result.rows[0]);
+    connection.release();
+  } catch (error) {
+    console.error("Error testing database connection:", error);
+  }
+
   // console.log(data[0]);
 
   /*
@@ -59,4 +77,4 @@ async function saveUserToDatabase(data) {
   }*/
 }
 
-module.exports = { saveUserToDatabase, testDatabaseConnection };
+module.exports = { saveUserToDatabase };

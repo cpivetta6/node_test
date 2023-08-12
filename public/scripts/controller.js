@@ -3,11 +3,13 @@ function handleSignUp(event) {
 
   const name = document.getElementById("name").value;
   const lastname = document.getElementById("lastname").value;
+  const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   const personData = {
     name: name,
     lastname: lastname,
+    email: email,
     password: password,
   };
 

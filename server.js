@@ -12,9 +12,9 @@ app.use(express.json());
 app.post("/signup", async (req, res) => {
   const personData = req.body;
 
-  console.log("Received data:", JSON.stringify(personData));
-  //saveUserToDatabase();
-  testDatabaseConnection();
+  // console.log("Received data:", JSON.stringify(personData));
+  saveUserToDatabase(JSON.stringify(personData));
+  //testDatabaseConnection();
 
   res.status(200).json({ message: "Data received successfully" });
 });
