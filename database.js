@@ -33,7 +33,8 @@ async function saveUserToDatabase(data) {
     "INSERT INTO public.users (name, surname, email,  password) VALUES ( $1, $2, $3, $4)";
 
   const parameters = [user.name, user.lastname, user.email, user.password];
-
+  console.log("INSERT DATA");
+  console.log(user);
   console.log(parameters);
 
   try {
