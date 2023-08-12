@@ -1,22 +1,23 @@
 const express = require("express");
-const http = require("http");
-const fs = require("fs");
 const path = require("path");
-const { Pool, Client } = require("pg");
+const { saveUserToDatabase, testDatabaseConnection } = require("./database");
 
 const hostname = "0.0.0.0"; // Allow connections from any IP
 const port = process.env.PORT || 3000; // Use the provided port or fallback to 3000
 const app = express();
 
-const pool = new Pool({
-  user: "test_gerz_user",
-  host: "dpg-cj9p3f2vvtos738jisn0-a.frankfurt-postgres.render.com",
-  database: "test_gerz",
-  password: "p7h8YjEmQPuYr5eHkueQoA3k9hs7ESzz",
-  port: 5432,
-});
-
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
+
+app.post("/signup", async (req, res) => {
+  const personData = req.body;
+
+  console.log("Received data:", JSON.stringify(personData));
+  //saveUserToDatabase();
+  testDatabaseConnection();
+
+  res.status(200).json({ message: "Data received successfully" });
+});
 
 app.get("/home", (req, res) => {
   const filePath = path.join(__dirname, "public", "index.html");
@@ -30,6 +31,7 @@ app.get("/home", (req, res) => {
 
 app.get("/signup", (req, res) => {
   const filePath = path.join(__dirname, "public", "signup.html");
+
   res.sendFile(filePath, (err) => {
     if (err) {
       console.error("Error sending signup.html:", err);

@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
 
-    <title>CodePen - Animated Login Form using Html &amp; CSS Only</title>
+    <title>./login-screen</title>
 
     <link rel="stylesheet" href="./style.css" />
   </head>
@@ -72,28 +72,31 @@
 
           <div class="form">
             <div class="inputBox">
-              <input type="name" required /> <i>First Name</i>
+              <input id="name" type="name" required  /> <i>First Name</i>
             </div>
 
             <div class="inputBox">
-              <input type="name" required /> <i>Last Name</i>
+              <input id="lastname" type="last-name" required /> <i>Last Name</i>
             </div>
 
-            <div class="inputBox">
-              <input type="password" required /> <i>Password</i>
-            </div>
+            <form class="inputBox">
+              <input id="password" type="password" required autocomplete="new-password" aria-hidden="true" /> <i>Password</i>
+            </form>
 
             <div class="links">
               <a href="/home">Back Home</a>
             </div>
 
             <div class="inputBox">
-              <input type="submit" value="Submit" />
+              <input id="submit" type="submit" value="Submit" />
             </div>
-          </div>
+          </form>
         </div>
       </div>
+      <script>
+        
+      </script>
     </section>
-    <!-- partial -->
   </body>
+  <script src="/scripts/controller.js"></script>
 </html>
