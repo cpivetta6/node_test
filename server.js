@@ -12,7 +12,7 @@ app.use(express.json());
 app.post("/signup", async (req, res) => {
   const personData = req.body;
 
-  // console.log("Received data:", JSON.stringify(personData));
+  console.log("Received data:", JSON.stringify(personData));
   saveUserToDatabase(JSON.stringify(personData));
   //testDatabaseConnection();
 
