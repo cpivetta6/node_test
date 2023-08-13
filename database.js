@@ -11,7 +11,6 @@ const pool = new Pool({
 
 async function saveUserToDatabase(data) {
   const user = JSON.parse(data);
-  const connection = await pool.connect();
 
   const query_addUser =
     "INSERT INTO public.users (name, surname, email,  password) VALUES ( $1, $2, $3, $4)";
@@ -19,12 +18,15 @@ async function saveUserToDatabase(data) {
   const parameters = [user.name, user.lastname, user.email, user.password];
 
   try {
-    await connection.query(query_addUser, parameters);
-    console.log("User successfully inserted.");
+    const connection = await pool.connect();
+    try {
+      await connection.query(query_addUser, parameters);
+      console.log("User successfully inserted.");
+    } finally {
+      connection.release();
+    }
   } catch (error) {
     console.error("Error executing query:", error);
-  } finally {
-    connection.release();
   }
 }
 
