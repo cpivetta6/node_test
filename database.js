@@ -3,11 +3,17 @@ const { Pool } = require("pg");
 const pool = new Pool({
   connectionString:
     "postgres://postgresql_test2_user:PlpTKH4Jg4Ehd9KXcyLkNzD8U2eakarD@dpg-cjblcorbq8nc73dleq6g-a/postgresql_test2",
+
+  //connectionString:
+  // "postgres://postgresql_test2_user:PlpTKH4Jg4Ehd9KXcyLkNzD8U2eakarD@dpg-cjblcorbq8nc73dleq6g-a.ohio-postgres.render.com/postgresql_test2",
   /* host: "dpg-cjblcorbq8nc73dleq6g-a/postgresql_test2",
+
+
   user: "postgresql_test2_user",
   password: "PlpTKH4Jg4Ehd9KXcyLkNzD8U2eakarD",
   database: "postgresql_test2",
   port: 5432,*/
+
   ssl: { rejectUnauthorized: false },
 });
 

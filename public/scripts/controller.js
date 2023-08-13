@@ -15,7 +15,7 @@ function handleSignUp(event) {
 
   const url = window.location.pathname;
 
-  fetch("http://localhost:3000/signup", {
+  fetch("https://test-node-server-test.onrender.com/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
