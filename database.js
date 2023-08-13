@@ -1,8 +1,11 @@
 const { query } = require("express");
 const { Pool } = require("pg");
+
+const connectionString =
+  "postgres://postgresql_test2_user:PlpTKH4Jg4Ehd9KXcyLkNzD8U2eakarD@dpg-cjblcorbq8nc73dleq6g-a:5432/postgresql_test2";
+
 const pool = new Pool({
-  connectionString:
-    "postgres://postgresql_test2_user:PlpTKH4Jg4Ehd9KXcyLkNzD8U2eakarD@dpg-cjblcorbq8nc73dleq6g-a/postgresql_test2",
+  connectionString: connectionString,
 
   //connectionString:
   // "postgres://postgresql_test2_user:PlpTKH4Jg4Ehd9KXcyLkNzD8U2eakarD@dpg-cjblcorbq8nc73dleq6g-a.ohio-postgres.render.com/postgresql_test2",
