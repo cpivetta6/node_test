@@ -18,14 +18,13 @@ async function saveUserToDatabase(data) {
 
   const parameters = [user.name, user.lastname, user.email, user.password];
 
-  console.log(parameters);
-
   try {
-    const result = await connection.query(query_addUser, parameters);
-    //console.log("Query result:", result.rows[0]);
-    connection.release();
+    await connection.query(query_addUser, parameters);
+    console.log("User successfully inserted.");
   } catch (error) {
-    console.error("Error testing database connection:", error);
+    console.error("Error executing query:", error);
+  } finally {
+    connection.release();
   }
 }
 
