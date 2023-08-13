@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const { saveUserToDatabase, testDatabaseConnection } = require("./database");
+const { saveUserToDatabase } = require("./database");
 
 const hostname = "0.0.0.0"; // Allow connections from any IP
 const port = process.env.PORT || 3000; // Use the provided port or fallback to 3000
@@ -14,8 +14,6 @@ app.post("/signup", async (req, res) => {
 
   console.log("Received data:", JSON.stringify(personData));
   saveUserToDatabase(JSON.stringify(personData));
-
-  testDatabaseConnection();
 
   res.status(200).json({ message: "Data received successfully" });
 });
