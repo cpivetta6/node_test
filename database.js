@@ -1,7 +1,7 @@
 const { query } = require("express");
 const { Pool } = require("pg");
 const pool = new Pool({
-  host: "dpg-cjblcorbq8nc73dleq6g-a.ohio-postgres.render.com",
+  host: "dpg-cjblcorbq8nc73dleq6g-a/postgresql_test2",
   user: "postgresql_test2_user",
   password: "PlpTKH4Jg4Ehd9KXcyLkNzD8U2eakarD",
   database: "postgresql_test2",
