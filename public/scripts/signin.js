@@ -2,16 +2,12 @@ const loginForm = document.getElementById("loginForm");
 //submitButton.addEventListener("click", handleSignIn);
 
 loginForm.addEventListener("submit", function (event) {
+  // Prevent the default form submission
   event.preventDefault();
-
-  const name = document.getElementById("name").value;
-  const lastname = document.getElementById("lastname").value;
-  const email = document.getElementById("email").value;
+  const email = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  const personData = {
-    name: name,
-    lastname: lastname,
+  const UserData = {
     email: email,
     password: password,
   };
@@ -20,12 +16,12 @@ loginForm.addEventListener("submit", function (event) {
 
   //"https://test-node-server-test.onrender.com/signup
 
-  fetch("http://localhost:3000/signup", {
+  fetch("http://localhost:3000/signin", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(personData),
+    body: JSON.stringify(UserData),
   })
     .then((resp) => {
       if (!resp.ok) {
@@ -37,12 +33,11 @@ loginForm.addEventListener("submit", function (event) {
     })
     .then((data) => {
       console.log(data);
-      window.location.href = "/signin";
+
+      window.location.href = "/user";
     })
     .catch((error) => {
       console.error("Fetch error:", error);
-      alert("Email already registered");
+      alert("invalid Username or Password");
     });
 });
-//const submitButton = document.querySelector('input[type="submit"]');
-//submitButton.addEventListener("click", handleSignUp);
