@@ -62,4 +62,20 @@ async function getUserList(data) {
   }
 }
 
+async function getUserList(data) {
+  const query = "SELECT id, email, password FROM public.users";
+
+  try {
+    const connection = await pool.connect();
+    try {
+      const userList = await connection.query(query);
+      return userList.rows;
+    } finally {
+      connection.release();
+    }
+  } catch (error) {
+    console.error("Error executing query:", error);
+  }
+}
+
 module.exports = { saveUserToDatabase, getUserList };
