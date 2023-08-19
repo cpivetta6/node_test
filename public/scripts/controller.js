@@ -20,7 +20,7 @@ loginForm.addEventListener("submit", function (event) {
 
   //"https://test-node-server-test.onrender.com/signup
 
-  fetch("http://localhost:3000/signup", {
+  fetch("https://test-node-server-test.onrender.com/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
