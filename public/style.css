@@ -13,7 +13,7 @@ body {
   background: #000;
 }
 section {
-  position: absolute;
+  position: relative;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -149,7 +149,49 @@ input[type="submit"]:active {
 }
 @media (max-width: 600px) {
   section span {
-    width: calc(20vw - 2px);
+    width: calc(20vw - 10px);
     height: calc(20vw - 2px);
   }
+}
+
+#logoutButton {
+  appearance: none;
+  background-color: #2ea44f;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 250px;
+  height: 80px;
+}
+
+#logoutButton:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+#logoutButton:hover {
+  background-color: #2c974b;
+}
+
+#logoutButton:focus {
+  box-shadow: rgba(46, 164, 79, 0.4) 0 0 0 3px;
+  outline: none;
 }

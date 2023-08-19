@@ -6,7 +6,7 @@ const connectionString =
 const databaseUrl = process.env.DATABASE_URL;
 
 const pool = new Pool({
-  connectionString: connectionString,
+  connectionString: databaseUrl,
   ssl: { rejectUnauthorized: false },
 });
 
@@ -46,7 +46,7 @@ async function saveUserToDatabase(data) {
   }
 }
 
-async function getUserList(data) {
+async function getUserList() {
   const query = "SELECT id, email, password FROM public.users";
 
   try {
@@ -62,14 +62,16 @@ async function getUserList(data) {
   }
 }
 
-async function getUserList(data) {
-  const query = "SELECT id, email, password FROM public.users";
+async function getUserData(username) {
+  const query = "SELECT name, surname FROM public.users where email = $1";
+
+  const parameter = [username];
 
   try {
     const connection = await pool.connect();
     try {
-      const userList = await connection.query(query);
-      return userList.rows;
+      const user = await connection.query(query, parameter);
+      return user.rows;
     } finally {
       connection.release();
     }
@@ -78,4 +80,4 @@ async function getUserList(data) {
   }
 }
 
-module.exports = { saveUserToDatabase, getUserList };
+module.exports = { saveUserToDatabase, getUserList, getUserData };

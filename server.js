@@ -1,11 +1,14 @@
 const express = require("express");
 const path = require("path");
-const { saveUserToDatabase, getUserList } = require("./database");
+const { saveUserToDatabase, getUserList, getUserData } = require("./database");
 const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 
 const hostname = "0.0.0.0"; // Allow connections from any IP
 const port = process.env.PORT || 3000; // Use the provided port or fallback to 3000
 const app = express();
+const SECRET_KEY = "test";
 
 //TO DO LIST
 /*
@@ -18,38 +21,48 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
+app.use(cookieParser());
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.post("/signin", async (req, res) => {
-  const userData = req.body;
+  const { email, password } = req.body;
 
   let userList = [];
 
   try {
-    userList = await getUserList(userData);
+    userList = await getUserList();
   } catch (err) {
     console.log(err);
   }
 
-  const foundUser = userList.find((user) => user.email === userData.email);
+  const foundUser = userList.find((user) => user.email === email);
+
   console.log(foundUser);
 
   if (foundUser === undefined) {
     return res
       .status(401)
       .json({ success: false, message: "Username not found" });
-  } else if (foundUser.password !== userData.password) {
+  } else if (foundUser.password !== password) {
     return res
       .status(401)
       .json({ success: false, message: "Incorrect password" });
   }
-  const userId = foundUser.id;
-  console.log("redirect to: /user/" + userId);
-  //req.session.user = { userId: userId };
-  res.cookie("userId", userId);
-  res.status(200).json({ message: "Login successful", userId: userId });
+
+  const payload = {
+    userId: foundUser.id,
+    username: foundUser.email,
+    role: "user",
+  };
+
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+  res.cookie("token", token);
+  //res.json({ token });
+
+  //res.status(200).json({ message: "Login successful", token });
+  res.redirect("/user");
 
   //--------------------------------------
   //res.redirect(`/user/${userId}`);
@@ -116,14 +129,31 @@ app.get("/signup", (req, res) => {
   });
 });
 
-app.get("/user/:id", async (req, res) => {
-  const id = req.params.id;
-  console.log("user page: " + id);
+const verifyTokenMiddleware = (req, res, next) => {
+  const token = req.cookies.token; // Assumes the token is stored in a cookie
 
-  // Fetch user data from the database based on the username
-  // Render the user's unique page using a template engine like EJS, Pug, etc.
+  if (!token) {
+    console.log("token invalid");
+    return res.redirect("/signin"); // Redirect to login page if token is missing
+  }
 
-  res.render("personalpage", { id });
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    req.user = decoded; // Attach user data to request object
+    next();
+  } catch (error) {
+    return res.redirect("/signin"); // Redirect to login page if token is invalid
+  }
+};
+
+app.get("/user", verifyTokenMiddleware, async (req, res) => {
+  const userName = req.user.username;
+
+  const user = await getUserData(userName);
+
+  const name = user[0].name;
+
+  res.render("personalpage", { name });
 });
 
 // Start the server
