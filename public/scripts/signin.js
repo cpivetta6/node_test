@@ -7,16 +7,9 @@ loginForm.addEventListener("submit", async function (event) {
   const email = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  const userData = {
-    email: email,
-    password: password,
-  };
-
-  const url = window.location.pathname;
-
   try {
     const response = await fetch(
-      "https://login-page-u9vv.onrender.com/signin/signin",
+      "https://login-page-u9vv.onrender.com/signin",
       {
         method: "POST",
         headers: {

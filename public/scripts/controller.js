@@ -18,6 +18,8 @@ loginForm.addEventListener("submit", function (event) {
 
   const url = window.location.pathname;
 
+  //fetch("https://login-page-u9vv.onrender.com/signin/signup", {
+
   fetch("https://login-page-u9vv.onrender.com/signin/signup", {
     method: "POST",
     headers: {

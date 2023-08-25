@@ -30,7 +30,7 @@ app.post("/signin", async (req, res) => {
 
   const foundUser = userList.find((user) => user.email === email);
 
-  console.log(foundUser);
+  // console.log(foundUser);
 
   if (foundUser === undefined) {
     return res
@@ -89,13 +89,13 @@ app.post("/signup", async (req, res) => {
 
   console.log("Received data:", JSON.stringify(personData));
   const userStatus = await saveUserToDatabase(JSON.stringify(personData));
-  console.log(userStatus);
+  //console.log(userStatus);
 
   if (userStatus) {
-    console.log("user ok");
+    //console.log("user ok");
     return res.status(200).json({ message: "Data received successfully" });
   }
-  console.log("user duplicatted");
+  //console.log("user duplicatted");
   return res.status(404).json({ message: "user duplicated" });
 });
 
@@ -124,7 +124,7 @@ const verifyTokenMiddleware = (req, res, next) => {
   const token = req.cookies.token; // Assumes the token is stored in a cookie
 
   if (!token) {
-    console.log("token invalid");
+    //console.log("token invalid");
     return res.redirect("/signin"); // Redirect to login page if token is missing
   }
 
