@@ -17,10 +17,11 @@ loginForm.addEventListener("submit", function (event) {
   };
 
   const url = window.location.pathname;
+  //const tableUrlToCacth = window.location.href;
 
   //fetch("https://login-page-u9vv.onrender.com/signin/signup", {
 
-  fetch("https://login-page-u9vv.onrender.com/signin/signup", {
+  fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
