@@ -16,8 +16,8 @@ loginForm.addEventListener("submit", function (event) {
     password: password,
   };
 
-  const url = window.location.pathname;
-  //const tableUrlToCacth = window.location.href;
+  //const url = window.location.pathname;
+  const url = window.location.href;
 
   //fetch("https://login-page-u9vv.onrender.com/signin/signup", {
 
@@ -45,5 +45,3 @@ loginForm.addEventListener("submit", function (event) {
       alert("Email already registered");
     });
 });
-//const submitButton = document.querySelector('input[type="submit"]');
-//submitButton.addEventListener("click", handleSignUp);

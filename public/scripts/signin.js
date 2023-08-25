@@ -7,7 +7,7 @@ loginForm.addEventListener("submit", async function (event) {
   const email = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  const url = window.location.pathname;
+  const url = window.location.href;
 
   try {
     const response = await fetch(url, {
