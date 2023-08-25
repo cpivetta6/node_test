@@ -18,9 +18,7 @@ loginForm.addEventListener("submit", function (event) {
 
   const url = window.location.pathname;
 
-  //"https://test-node-server-test.onrender.com/signup
-
-  fetch("https://test-node-server-test.onrender.com/signup", {
+  fetch("https://login-page-u9vv.onrender.com/signin/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

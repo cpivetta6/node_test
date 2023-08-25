@@ -10,15 +10,6 @@ const port = process.env.PORT || 3000; // Use the provided port or fallback to 3
 const app = express();
 const SECRET_KEY = "test";
 
-//TO DO LIST
-/*
- ESTAMOS COM UM PROBLEMA QUANDO TENTAMOS LOGAR E ENTRAR NA PAGINA DO USUARIO
- QUANDO EU ENTRO NA PAGINA DO USUARIO SEM O ID, APENAS /USER, ELE ENTRA NORMALMENTE
- MAS QUANDO EU TENTO COLCOAR O ID, ELE CHEGA COMO INVALIDO
- ACHO QUE è UM PROBLEMA OU NA CONVERSAO DO DADO EM JSON
- OU è UM PROBLEMA DE TEMPO DE RESPOSTA DO "FETCH"
-*/
-
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(cookieParser());
